@@ -28,11 +28,11 @@ async function getProducts() {
     let myProduct = products.map(function (value, index, array) {
       let newPrice = ((100 - value.discountPercentage) / 100) * value.price;
             return `
-<div class="shadow-lg max-w-80 space-y-2 p-3 font-bold rounded-4xl">
+<div class="shadow-sm max-w-70 space-y-2 p-3 font-bold rounded-2xl border-2 border-gray-200">
 
     <div class="relative mb-7">
         <img  
-          class="object-contain mx-auto transition duration-300 hover:scale-110 bg-gray-200 mt-5 rounded-md" 
+          class="object-contain mx-auto transition duration-300 hover:scale-90 bg-gray-200 mt-5 rounded-md" 
           src="${value.images[0]}"
         >
 
@@ -40,23 +40,23 @@ async function getProducts() {
             For sale
         </h1>
     </div>
-
-    <p class="text-lg font-bold text-gray-800 mb-2 text-center">
+      <p class="border-2 border-gray-200"></p>
+    <p class="text-md font-bold text-gray-800 mb-2 text-center">
         Name: ${value.title}
     </p>
 
-    <p class="text-lg font-bold text-gray-800 mb-2 text-center">
+    <p class="text-md font-bold text-gray-800 mb-2 text-center">
         <span class="newPrice">price: $${newPrice.toFixed(2)}</span>
     </p>
 
-    <p class="text-lg font-bold text-gray-800 mb-2 text-center">
+    <p class="text-md font-bold text-gray-800 mb-2 text-center">
        ${value.rating}  <i class="fa-solid fa-star text-yellow-500"></i> <i class="fa-solid fa-star text-yellow-500"></i> <i class="fa-solid fa-star text-yellow-500"></i><i class="fa-solid fa-star text-yellow-500"></i> <i class="fa-regular fa-star text-yellow-500"></i></p>
     </p>
 
     <div class="flex justify-center">
         <button 
           onclick="addtocart('${value.images[0]}', '${value.title}', '${value.rating}', '${newPrice}')"
-          class="bg-blue-400 px-3 py-3 rounded-md text-2xl hover:bg-blue-500 text-white">
+          class="bg-blue-400 px-3 py-3 rounded-md text-lg hover:bg-blue-500 text-white">
             Add to cart
         </button>
     </div>
@@ -79,6 +79,13 @@ function addtocart(image, title, rating, warrantyInformation, price) {
   if (localStorageaddtocart && localStorageaddtocart.length > 0) {
     previousaddtocart = localStorageaddtocart;
   }
+
+    const isDuplicate = previousaddtocart.some((item) => item.title === title);
+
+    if (isDuplicate) {
+      alert(`"${title}" is already in your cart!`);
+      return;
+    }
 
   previousaddtocart.push({
     rating: rating,

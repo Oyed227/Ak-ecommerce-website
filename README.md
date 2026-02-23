@@ -1,1 +1,1 @@
-This is a Ecomerce website,and it's all about adding items to cart
+This is an Ecomerce website,and it's all about adding items to cart.

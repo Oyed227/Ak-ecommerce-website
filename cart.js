@@ -11,7 +11,7 @@ let mycart = JSON.parse(localStorage.getItem("addtocart")) || [];
 
 function renderCart() {
   const container = document.querySelector("#allCarts");
-  if (!container) return; // Prevent errors if the element doesn't exist on the page
+  if (!container) return;
 
   container.innerHTML = "";
 
@@ -19,13 +19,15 @@ function renderCart() {
     container.innerHTML = mycart
       .map(
         (value, index) => `
-            <div class="cart-item shadow-lg border rounded-xl max-w-80 space-y-3 p-4 font-bold text-center bg-white">
+        <div class="pl-20"> 
+        <div class="cart-item shadow-lg border rounded-xl max-w-80 space-y-3 p-4 font-bold text-center bg-white">
                 <img src="${value.image}" alt="${value.title}" class="w-full h-40 object-contain mx-auto">
                 <p class="text-gray-800 uppercase tracking-wide">${value.title}</p>
                 <button onclick="removeItem(${index})" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 transition">
                     Remove Item
                 </button>
-            </div>
+        </div>
+        </div>
         `,
       )
       .join("");
